@@ -26,8 +26,14 @@ export function LauncherPage() {
   const navigate = useNavigate();
   const [installOpen, setInstallOpen] = useState(false);
   const [installPrompt, setInstallPrompt] = useState(null);
+  const [isInstalled, setIsInstalled] = useState(false);
 
   useEffect(() => {
+    const standalone = window.matchMedia('(display-mode: standalone)').matches
+      || window.navigator.standalone === true
+      || Boolean(window.Capacitor?.isNativePlatform?.());
+    setIsInstalled(standalone);
+
     const captureInstallPrompt = (event) => {
       event.preventDefault();
       setInstallPrompt(event);
@@ -77,12 +83,12 @@ export function LauncherPage() {
         </div>
       </div>
 
-      <button type="button" onClick={handleInstall} className="desktop-download-fab group fixed bottom-5 left-1/2 -translate-x-1/2 z-40 inline-flex items-center gap-3 rounded-2xl bg-indigo-600 px-5 py-3.5 text-white shadow-xl shadow-indigo-600/30 transition-all hover:-translate-y-1 hover:bg-indigo-700 hover:shadow-2xl focus:outline-none focus:ring-4 focus:ring-indigo-500/30" aria-label="تثبيت شاطر كتطبيق للكمبيوتر">
+      {!isInstalled && <button type="button" onClick={handleInstall} className="desktop-download-fab group fixed bottom-5 left-1/2 -translate-x-1/2 z-40 inline-flex items-center gap-3 rounded-2xl bg-indigo-600 px-5 py-3.5 text-white shadow-xl shadow-indigo-600/30 transition-all hover:-translate-y-1 hover:bg-indigo-700 hover:shadow-2xl focus:outline-none focus:ring-4 focus:ring-indigo-500/30" aria-label="تثبيت شاطر كتطبيق للكمبيوتر">
         <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-white/15"><Download className="h-5 w-5 transition-transform group-hover:translate-y-0.5" /></span>
         <span className="text-right"><span className="block text-sm font-extrabold">تثبيت التطبيق الآن</span><span className="block text-[11px] text-indigo-100">اضغط للتثبيت مباشرة</span></span>
-      </button>
+      </button>}
 
-      {installOpen && (
+      {!isInstalled && installOpen && (
         <div className="fixed inset-0 z-50 flex items-end sm:items-center justify-center p-4 bg-slate-950/60 backdrop-blur-sm" role="dialog" aria-modal="true" aria-labelledby="desktop-install-title" onClick={() => setInstallOpen(false)}>
           <div className="w-full max-w-lg rounded-3xl bg-white dark:bg-slate-900 shadow-2xl p-6 sm:p-7 animate-[cardMount_0.25s_ease-out]" onClick={(event) => event.stopPropagation()}>
             <div className="flex items-start justify-between gap-4 mb-6">
