@@ -4,7 +4,7 @@
   "description": "نظام إدارة المتجر والمبيعات والمخزون والفواتير",
   "lang": "ar",
   "dir": "rtl",
-  "start_url": "/home",
+  "start_url": "/",
   "scope": "/",
   "display": "standalone",
   "display_override": ["window-controls-overlay", "standalone"],
