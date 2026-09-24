@@ -43,7 +43,7 @@ export function LauncherPage() {
 
   const handleInstall = async () => {
     if (!installPrompt) {
-      setInstallOpen(true);
+      window.alert('التثبيت المباشر غير متاح حاليًا. افتح الموقع في Chrome أو Edge عبر HTTPS ثم اضغط زر التثبيت مرة أخرى.');
       return;
     }
     installPrompt.prompt();
@@ -79,7 +79,7 @@ export function LauncherPage() {
 
       <button type="button" onClick={handleInstall} className="desktop-download-fab group fixed bottom-5 left-1/2 -translate-x-1/2 z-40 inline-flex items-center gap-3 rounded-2xl bg-indigo-600 px-5 py-3.5 text-white shadow-xl shadow-indigo-600/30 transition-all hover:-translate-y-1 hover:bg-indigo-700 hover:shadow-2xl focus:outline-none focus:ring-4 focus:ring-indigo-500/30" aria-label="تثبيت شاطر كتطبيق للكمبيوتر">
         <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-white/15"><Download className="h-5 w-5 transition-transform group-hover:translate-y-0.5" /></span>
-        <span className="text-right"><span className="block text-sm font-extrabold">تثبيت تطبيق الكمبيوتر</span><span className="block text-[11px] text-indigo-100">PWA — Windows · macOS · Linux</span></span>
+        <span className="text-right"><span className="block text-sm font-extrabold">تثبيت التطبيق الآن</span><span className="block text-[11px] text-indigo-100">اضغط للتثبيت مباشرة</span></span>
       </button>
 
       {installOpen && (
