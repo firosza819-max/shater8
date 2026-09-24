@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+import { BrowserRouter, HashRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { ThemeProvider } from '@/context/ThemeContext';
 import { ToastProvider } from '@/context/ToastContext';
 import { AppShell } from '@/components/AppShell';
@@ -10,10 +10,12 @@ import { InvoicesPage } from '@/pages/InvoicesPage';
 import { LauncherPage } from '@/pages/LauncherPage';
 
 export default function App() {
+  const Router = window.location.protocol === 'file:' ? HashRouter : BrowserRouter;
+
   return (
     <ThemeProvider>
       <ToastProvider>
-        <BrowserRouter>
+        <Router>
           <Routes>
             <Route path="/" element={<Navigate to="/home" replace />} />
             <Route path="/home" element={<LauncherPage />} />
@@ -59,7 +61,7 @@ export default function App() {
             />
             <Route path="*" element={<Navigate to="/home" replace />} />
           </Routes>
-        </BrowserRouter>
+        </Router>
       </ToastProvider>
     </ThemeProvider>
   );
